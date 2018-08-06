@@ -1,34 +1,85 @@
-<h2>All Tasks</h2>
-
-<form action="/sortcompleted" method="get">
-  <input type="submit" value="Done Tasks">
-    </form> 
-
-<table>
-<ul>
-
-<%@posts.each do |post|%>
-<tr>
-<td><li><strong>Task: </strong><%=post["title"]%> | <strong><%=post["done"] ? "Done " : "Undone " %></strong>  </li></td>  
-
-<td> <form action="/post/<%=post["id"]%>" method="post"> 
-  <input type="submit" name="_method" value="Delete">
-</form>
-</td>
-<td><form action="/complete/<%=post["id"]%>" method="get">
-  <input type="submit" name="_method" value="Complete!">
-    </form> 
-</td>
-<tr>
-<%end%>
-
-</table>
-</ul>
-
-<h3>Add a New Task</h3>
+  <div class="newtask">
     <form method="post" action="/post">
-    <label for="body">Task: </label>
+    <label for="body">New Task: </label>
     <input type="text" name="body">
     <input type="submit" value="Add!">
-</form>
+    </form>
+  </div>
+<div class="fluid">
+<div class="row container-fluid">
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="active"><a href="#all" aria-controls="description" role="tab" data-toggle="tab">All Tasks</a></li>
+      <li role="presentation"><a href="#undone" aria-controls="comments" role="tab" data-toggle="tab">Undone</a></li>
+      <li role="presentation"><a href="#done" aria-controls="comments" role="tab" data-toggle="tab">Done</a></li>
+    </ul>
+    <div class="tab-content" id="tabs">
+          <div role="tabpanel" class="tab-pane active" id="all">
+            <table>
+            <ul>
+              <%@posts.each do |post|%>
+                <tr>
+                <td><li><strong>Task: </strong><%=post["title"]%> | <strong><%=post["done"] ? "Done " : "Undone " %></strong>  </li></td>  
+            
+                <td> <form action="/post/<%=post["id"]%>" method="post"> 
+                  <input type="submit" name="_method" value="Delete">
+                </form>
+                </td>
+                <td><form action="/complete/<%=post["id"]%>" method="get">
+                  <input type="submit" name="_method" value="Complete!">
+                    </form> 
+                </td>
+                <tr>
+              <%end%>
+            </table>
+            </ul>
+          
+          </div>
+          <div role="tabpanel" class="tab-pane" id="undone">
+            
+            <table>
+             <ul>
+              <%@undoneposts.each do |post|%>
+                <tr>
+                <td><li><strong>Task: </strong><%=post["title"]%> | <strong><%=post["done"] ? "Done " : "Undone " %></strong></li></td>  
+            
+                <td> <form action="/post/<%=post["id"]%>" method="post"> 
+                  <input type="submit" name="_method" value="Delete">
+                </form>
+                </td>
+                <td><form action="/complete/<%=post["id"]%>" method="get">
+                  <input type="submit" name="_method" value="Complete!">
+                    </form> 
+                </td>
+                <tr>
+              <%end%>
+            </table>
+            </ul>
+           
+          </div>
+          <div role="tabpanel" class="tab-pane" id="done">
+            
+            <table>              
+             <ul>
+              <%@doneposts.each do |post|%>
+                <tr>
+                <td><li><strong>Task: </strong><%=post["title"]%> | <strong><%=post["done"] ? "Done " : "Undone " %></strong>  </li></td>  
+            
+                <td> <form action="/post/<%=post["id"]%>" method="post"> 
+                  <input type="submit" name="_method" value="Delete">
+                </form>
+                </td>
+                <td><form action="/complete/<%=post["id"]%>" method="get">
+                  <input type="submit" name="_method" value="Complete!">
+                    </form> 
+                </td>
+                <tr>
+              <%end%>
+            </table>
+            </ul>
+
+          </div>
+        </div>
+    </div>
+  </div>
+
 

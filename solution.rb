@@ -3,8 +3,6 @@
 require "make_todo"
 
 get '/' do
-    @sort = 0
-    
     @posts = Tarea.all
         @doneposts = []
         @undoneposts = []
